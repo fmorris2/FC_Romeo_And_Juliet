@@ -1,22 +1,28 @@
 package scripts.fc.missions.fcromeoandjuliet.tasks;
 
-import org.tribot.api.DynamicClicking;
 import org.tribot.api.Timing;
 import org.tribot.api.interfaces.Positionable;
-import org.tribot.api2007.Camera;
+import org.tribot.api.util.abc.ABCProperties;
 import org.tribot.api2007.Inventory;
 import org.tribot.api2007.Objects;
 import org.tribot.api2007.Player;
 import org.tribot.api2007.types.RSObject;
 import org.tribot.api2007.types.RSTile;
 
+import scripts.fc.api.abc.PersistantABCUtil;
 import scripts.fc.api.generic.FCConditions;
+import scripts.fc.api.interaction.impl.objects.ClickObject;
 import scripts.fc.api.travel.Travel;
+import scripts.fc.framework.data.Vars;
 import scripts.fc.framework.task.Task;
 import scripts.fc.missions.fcromeoandjuliet.data.QuestSettings;
 
 public class PickBerries extends Task
 {
+	private static final long serialVersionUID = 1969638374658443588L;
+
+	private static final int ESTIMATED_WAIT = 3000;
+	
 	private final Positionable BERRY_TILE = new RSTile(3267, 3369, 0);
 	private final int DISTANCE_THRESHOLD = 6;
 	private final int[] BUSH_IDS = {23625, 23626};
@@ -31,17 +37,22 @@ public class PickBerries extends Task
 			final int STARTING_SPACE = Inventory.getAll().length;
 		
 			RSObject[] bushes = Objects.findNearest(10, BUSH_IDS);
-			if(bushes.length > 0)
+			if(bushes.length > 0 && new ClickObject("Pick-from", bushes[0]).execute())
 			{
-				if(bushes[0].isOnScreen())
+				PersistantABCUtil abc2 = Vars.get().get("abc2");
+				abc2.generateTrackers(ESTIMATED_WAIT);
+				long startTime = Timing.currentTimeMillis();
+				boolean success = Timing.waitCondition(FCConditions.inventoryChanged(STARTING_SPACE), 4000);
+				if(success)
 				{
-					if(DynamicClicking.clickRSObject(bushes[0], "Pick-from"))
-						Timing.waitCondition(FCConditions.inventoryChanged(STARTING_SPACE), 4000);
+					ABCProperties props = Vars.get().get("abc2Props");
+					
+					props.setWaitingTime(((Long)Timing.timeFromMark(startTime)).intValue());
+					props.setWaitingFixed(true);
+					abc2.generateAndPerformReaction(props);
 				}
-				else
-				{
-					Camera.turnToTile(bushes[0]);
-				}
+				
+				return success;
 			}
 		}
 		

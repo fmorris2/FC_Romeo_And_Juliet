@@ -3,11 +3,12 @@ package scripts.fc.missions.fcromeoandjuliet.tasks;
 import org.tribot.api.General;
 import org.tribot.api.interfaces.Positionable;
 import org.tribot.api2007.Player;
-import org.tribot.api2007.WebWalking;
 import org.tribot.api2007.types.RSTile;
 
+import scripts.fc.api.interaction.impl.npcs.dialogue.DialogueThread;
 import scripts.fc.api.interaction.impl.npcs.dialogue.NpcDialogue;
 import scripts.fc.api.travel.Travel;
+import scripts.fc.api.wrappers.FCTiming;
 import scripts.fc.framework.task.Task;
 import scripts.fc.missions.fcromeoandjuliet.data.QuestSettings;
 
@@ -33,8 +34,11 @@ public class RomeoDialogue extends Task
 			NpcDialogue dialogue = QuestSettings.ROMEO_DIALOGUE_ONE.isValid() ? new NpcDialogue("Talk-to", "Romeo", DISTANCE_THRESHOLD, 0, 0) 
 						: new NpcDialogue("Talk-to", "Romeo", DISTANCE_THRESHOLD, 3);
 			
-			if(dialogue.execute())
-				General.sleep(800, 1800);
+			if((dialogue.execute() || dialogue.wentThroughDialogue()) && QuestSettings.ROMEO_DIALOGUE_THREE.isValid())
+			{
+				General.println("Waiting for cutscene to start...");
+				FCTiming.waitCondition(() -> DialogueThread.isInCutscene(), 3500);
+			}
 		}
 			
 		return false;

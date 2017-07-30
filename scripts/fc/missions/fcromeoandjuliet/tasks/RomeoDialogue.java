@@ -23,12 +23,7 @@ public class RomeoDialogue extends Task
 	public boolean execute()
 	{
 		if(Player.getPosition().distanceTo(ROMEO_TILE) > DISTANCE_THRESHOLD)
-		{
-			if(JulietDialogue.isInHouse(2))
-				JulietDialogue.exitHouse();
-			else
-				Travel.webWalkTo(ROMEO_TILE);
-		}
+			Travel.webWalkTo(ROMEO_TILE);
 		else
 		{
 			NpcDialogue dialogue = QuestSettings.ROMEO_DIALOGUE_ONE.isValid() ? new NpcDialogue("Talk-to", "Romeo", DISTANCE_THRESHOLD, 0, 0) 

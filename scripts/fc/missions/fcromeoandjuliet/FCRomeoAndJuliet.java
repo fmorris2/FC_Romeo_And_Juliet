@@ -19,6 +19,7 @@ import scripts.fc.missions.fcromeoandjuliet.tasks.InventoryCheck;
 import scripts.fc.missions.fcromeoandjuliet.tasks.JulietDialogue;
 import scripts.fc.missions.fcromeoandjuliet.tasks.PickBerries;
 import scripts.fc.missions.fcromeoandjuliet.tasks.RomeoDialogue;
+import scripts.fc.missions.fcromeoandjuliet.tasks.RomeoDialogueTwo;
 
 public class FCRomeoAndJuliet extends MissionManager implements Mission
 {
@@ -65,7 +66,7 @@ public class FCRomeoAndJuliet extends MissionManager implements Mission
 	public LinkedList<Task> getTaskList()
 	{
 		return new LinkedList<Task>(Arrays.asList(new InventoryCheck(), new PickBerries(),
-				new RomeoDialogue(), new JulietDialogue(), new FatherLawrence(), new Apothecary(),
+				new RomeoDialogue(), new RomeoDialogueTwo(), new JulietDialogue(), new FatherLawrence(), new Apothecary(),
 				new Cutscene()));
 	}
 

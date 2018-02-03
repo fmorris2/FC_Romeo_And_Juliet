@@ -42,7 +42,7 @@ public class RomeoDialogue extends Task
 	@Override
 	public boolean shouldExecute()
 	{
-		return QuestSettings.ROMEO_DIALOGUE_ONE.isValid() || QuestSettings.ROMEO_DIALOGUE_TWO.isValid() 
+		return QuestSettings.ROMEO_DIALOGUE_ONE.isValid()
 				|| QuestSettings.ROMEO_DIALOGUE_THREE.isValid();
 	}
 

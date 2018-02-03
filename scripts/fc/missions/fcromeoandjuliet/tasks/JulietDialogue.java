@@ -46,8 +46,11 @@ public class JulietDialogue extends Task
 	
 	public void goToJuliet()
 	{
+		Travel.shouldFallBackOnTribotWeb = false;
 		if(Travel.webWalkTo(JULIET_TILE, FCConditions.inAreaCondition(JULIET_AREA)))
 			Timing.waitCondition(FCConditions.inAreaCondition(JULIET_AREA), 5000);
+		
+		Travel.shouldFallBackOnTribotWeb = true;
 	}
 
 }

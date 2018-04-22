@@ -1,7 +1,7 @@
 # FC Romeo & Juliet
 
 ## Overview
-Script written for the [TRiBot](https://tribot.org/forums/) community to complete the [Cook's Assistant](http://oldschoolrunescape.wikia.com/wiki/Romeo_and_Juliet) quest on
+Script written for the [TRiBot](https://tribot.org/forums/) community to complete the [Romeo and Juliet](http://oldschoolrunescape.wikia.com/wiki/Romeo_and_Juliet) quest on
 [Old School Runescape](https://oldschool.runescape.com/) (OSRS). This is a submodule of the main [FC Questing](https://github.com/fmorris2/fc-questing) script.
 
 ## Features

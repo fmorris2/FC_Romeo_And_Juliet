@@ -24,7 +24,7 @@ public class Apothecary extends Task
 			Travel.webWalkTo(APOTHECARY_TILE);
 		else
 		{
-			NpcDialogue dialogue = new NpcDialogue("Talk-to", "Apothecary", 10, 2, 0);
+			NpcDialogue dialogue = new NpcDialogue("Talk-to", "Apothecary", 10, 1,0);
 			return dialogue.execute()
 					|| (dialogue.wentThroughDialogue() && FCTiming.waitCondition(() -> NPCChat.getClickContinueInterface() != null, 3200)
 							&& new NpcDialogue("Talk-to", "Apothecary", 10).execute());

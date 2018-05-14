@@ -4,6 +4,7 @@ import org.tribot.api2007.Game;
 
 import scripts.fc.framework.quest.QuestBool;
 import scripts.fc.missions.fcromeoandjuliet.data.bools.impl.BerryBool;
+import scripts.fc.missions.fcromeoandjuliet.data.bools.impl.CutsceneBool;
 import scripts.fc.missions.fcromeoandjuliet.data.bools.impl.PotionBool;
 import scripts.fc.missions.fcromeoandjuliet.data.bools.impl.SpaceBool;
 
@@ -15,12 +16,12 @@ public enum QuestSettings
 	ROMEO_DIALOGUE_TWO(new int[][]{{144, 20}}),
 	FATHER_LAWRENCE(new int[][]{{144, 30}}),
 	APOTHECARY_DIALOGUE_ONE(new int[][]{{144, 40}}),
-	GET_BERRIES(new int[][]{{144, 50}, {1021, 0}}, new BerryBool(false), new PotionBool(false)),
-	APOTHECARY_DIALOGUE_TWO(new int[][]{{144, 50}, {1021, 0}, {673, 0}}, new PotionBool(false), new BerryBool(true)),
-	JULIET_DIALOGUE_TWO(new int[][]{{144, 50}, {1021, 0}}, new PotionBool(true)),
-	JULIET_CUTSCENE(new int[][]{{1021, 192}, {144, 50}}),
-	ROMEO_DIALOGUE_THREE(new int[][]{{144, 60}, {1021, 0}}),
-	FINAL_CUTSCENE(new int[][]{{144, 60}, {1021, 192}}),
+	GET_BERRIES(new int[][]{{144, 50}}, new BerryBool(false), new PotionBool(false), new CutsceneBool(false)),
+	APOTHECARY_DIALOGUE_TWO(new int[][]{{144, 50}, {673, 0}}, new PotionBool(false), new BerryBool(true), new CutsceneBool(false)),
+	JULIET_DIALOGUE_TWO(new int[][]{{144, 50}}, new PotionBool(true), new CutsceneBool(false)),
+	JULIET_CUTSCENE(new int[][]{{144, 50}}, new CutsceneBool(true)),
+	ROMEO_DIALOGUE_THREE(new int[][]{{144, 60}}, new CutsceneBool(false)),
+	FINAL_CUTSCENE(new int[][]{{144, 60}}, new CutsceneBool(true)),
 	QUEST_COMPLETE(new int[][]{{144, 100}});
 	
 	private static final QuestBool SPACE_BOOL = new SpaceBool(true);

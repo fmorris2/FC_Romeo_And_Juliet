@@ -7,8 +7,8 @@ import org.tribot.api.General;
 import org.tribot.api2007.Login;
 import org.tribot.api2007.Login.STATE;
 
-import scripts.fc.framework.mission.Mission;
 import scripts.fc.framework.mission.MissionManager;
+import scripts.fc.framework.quest.QuestMission;
 import scripts.fc.framework.script.FCMissionScript;
 import scripts.fc.framework.task.Task;
 import scripts.fc.missions.fcromeoandjuliet.data.QuestSettings;
@@ -21,7 +21,7 @@ import scripts.fc.missions.fcromeoandjuliet.tasks.PickBerries;
 import scripts.fc.missions.fcromeoandjuliet.tasks.RomeoDialogue;
 import scripts.fc.missions.fcromeoandjuliet.tasks.RomeoDialogueTwo;
 
-public class FCRomeoAndJuliet extends MissionManager implements Mission
+public class FCRomeoAndJuliet extends MissionManager implements QuestMission
 {
 	public FCRomeoAndJuliet(FCMissionScript script)
 	{
@@ -90,6 +90,16 @@ public class FCRomeoAndJuliet extends MissionManager implements Mission
 	@Override
 	public void resetStatistics()
 	{
+	}
+
+	@Override
+	public boolean canStart() {
+		return true;
+	}
+
+	@Override
+	public int getQuestPointReward() {
+		return 5;
 	}
 
 }

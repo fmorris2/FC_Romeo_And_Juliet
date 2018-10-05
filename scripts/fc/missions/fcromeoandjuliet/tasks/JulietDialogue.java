@@ -4,7 +4,6 @@ import org.tribot.api.General;
 import org.tribot.api.Timing;
 import org.tribot.api.interfaces.Positionable;
 import org.tribot.api2007.Player;
-import org.tribot.api2007.types.RSArea;
 import org.tribot.api2007.types.RSTile;
 
 import scripts.fc.api.generic.FCConditions;
@@ -17,17 +16,20 @@ public class JulietDialogue extends Task
 {
 	private static final long serialVersionUID = -1480455143391513930L;
 	
-	private static final RSArea JULIET_AREA = new RSArea(new RSTile(3155, 3427, 1), new RSTile(3161, 3424, 1));
 	private static final Positionable JULIET_TILE = new RSTile(3158, 3426, 1);
+	private static final int DIST_THRESH = 6;
 	
 	@Override
 	public boolean execute()
 	{
-		if(!JULIET_AREA.contains(Player.getPosition()))
+		final RSTile playerPos = Player.getPosition();
+		if(playerPos.getPlane() != JULIET_TILE.getPosition().getPlane() || playerPos.distanceTo(JULIET_TILE) > DIST_THRESH) {
 			goToJuliet();
-		else
+		}
+		else {
 			if(new NpcDialogue("Talk-to", "Juliet", 15, 0).execute())
 				General.sleep(800, 1800);
+		}
 		
 		return false;
 	}
@@ -47,8 +49,8 @@ public class JulietDialogue extends Task
 	public void goToJuliet()
 	{
 		Travel.shouldFallBackOnTribotWeb = false;
-		if(Travel.webWalkTo(JULIET_TILE, FCConditions.inAreaCondition(JULIET_AREA)))
-			Timing.waitCondition(FCConditions.inAreaCondition(JULIET_AREA), 5000);
+		if(Travel.webWalkTo(JULIET_TILE, FCConditions.withinDistanceOfTile(JULIET_TILE, DIST_THRESH)))
+			Timing.waitCondition(FCConditions.withinDistanceOfTile(JULIET_TILE, DIST_THRESH), 5000);
 		
 		Travel.shouldFallBackOnTribotWeb = true;
 	}
